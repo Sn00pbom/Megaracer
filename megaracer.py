@@ -7,7 +7,7 @@ private_play_selector = '#gwt-uid-17 > table > tbody > tr:nth-child(2) > td > ta
 public_play_selector = '#gwt-uid-15 > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div'
 practice_play_selector = '#gwt-uid-15 > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div'
 
-raceType = raw_input('Choose race type:\n'
+raceType = input('Choose race type:\n'
                      '0: public\n'
                      '1: practice\n'
                      '2: private\n'
@@ -17,7 +17,7 @@ try:
     if raceType < 0 or raceType > 2:
         raise Exception('Out of range.')
 except:
-    print 'Invalid input. quitting.'
+    print(  'Invalid input. quitting.' )
     driver.close()
     exit()
 
@@ -33,23 +33,23 @@ elif selected == 5:
 textFound = False
 sout = ''
 
-raw_input('Press enter when ready in lobby>>')
+input('Press enter when ready in lobby>>')
 
-print 'Waiting for text to appear...'
+print(  'Waiting for text to appear...' )
 while not textFound:
     try:
         div = driver.find_element_by_css_selector(selected)
-        print 'Found_a'
+        print(  'Found_a' )
         sdiv = div.find_elements_by_xpath('.//*')
-        print 'Found_b'
+        print(  'Found_b' )
         subs = sdiv[0].find_elements_by_xpath('.//*')
-        print 'Found_c'
+        print(  'Found_c' )
 
         for s in subs:
             sout += s.get_attribute('innerHTML')
 
-        print 'Text:\n================================================'
-        print sout
+        print(  'Text:\n================================================' )
+        print ( sout )
         textFound = True;
     except:
         pass
@@ -60,18 +60,15 @@ while not inputFound:
         el = driver.find_element_by_class_name("txtInput")
         if el.is_enabled():
 
-            print 'Typing...'
+            print(  'Typing...' )
             inputFound = True
     except:
         pass
 
-print
 for l in sout:
     driver.find_element_by_class_name("txtInput").send_keys(l)
-    # print l,
 
-print
-raw_input("Press Enter to quit.")
+input("Press Enter to quit.")
 try:
     driver.close()
 except:
